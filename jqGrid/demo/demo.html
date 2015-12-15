@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jqGrid子表测试</title>
+	<link rel="stylesheet" type="text/css" href="../jqGrid-4.4.3/css/ui.jqgrid.css">
+	<link rel="stylesheet" type="text/css" href="../jqGrid-4.4.3/css/resetJqGrid.css">
+	<link rel="stylesheet" type="text/css" href="../jquery-ui/jquery-ui-1.9.2.custom.css">
+</head>
+<body>
+	<table id="grid"></table>
+	<div id="pager"></div>
+
+	<script src="../jqGrid-4.4.3/js/jquery-1.7.2.min.js"></script>
+	<script src="../jqGrid-4.4.3/js/jquery.jqGrid.min.js"></script>
+	<script src="../dataGrid.js"></script>
+	
+	<script>
+
+		$(function(){
+		  pageInit();
+		});
+
+		function pageInit(){
+			$("#grid").dataGrid({
+		        data: testData,
+		        datatype: 'local',
+		        autowidth: true,
+		        rowNum: 99999,
+		        colNames: ['名称', '类别', '点选率', '销售量', '销售额', '销售额变化量'],
+		        colModel: [
+		            {name: 'dishName', index: 'dishName', align: 'center'},
+		            {name: 'middleClassName', index: 'middleClassName', align: 'center'},
+		            {
+		                name: 'currentSelectRate',
+		                index: 'currentSelectRate',
+		                align: 'center',
+		                sorttype: 'number'
+		            },
+		            {name: 'currentQty', index: 'currentQty', align: "center", sorttype: 'number'},
+		            {
+		                name: 'currentAmount',
+		                index: 'currentAmount',
+		                align: "center",
+		                sorttype: 'number'
+		            },
+		            {
+		                name: 'increaseAmount',
+		                index: 'increaseAmount',
+		                align: "center",
+		                sorttype: 'number'
+		            }
+		        ],
+		        subGrid: true,
+				showSubTable: function(subgrid_table_id, pager_id, rowData){
+					console.log(rowData);
+					$("#"+subgrid_table_id).dataGrid({
+                    data: subData,
+                    datatype: 'local',
+                    autowidth: false,
+                    height: '100%',
+                    rowNum: 99999,
+                    ccolNames: ['No','Item','Qty','Unit','Line Total'],
+                    colModel: [
+                      {name:"num",index:"num",width:80,key:true},
+                      {name:"item",index:"item",width:130},
+                      {name:"qty",index:"qty",width:70,align:"right"},
+                      {name:"unit",index:"unit",width:70,align:"right"},
+                      {name:"total",index:"total",width:70,align:"right",sortable:false}
+                    ]
+                });
+				}
+		    });
+		}
+
+		var testData = [
+			{
+				dishName: 1,
+				middleClassName: 'name1',
+				currentSelectRate: 1,
+				currentQty: 1,
+				currentAmount: 1,
+				increaseAmount: 1
+
+			},
+			{
+				dishName: 2,
+				middleClassName: 'name2',
+				currentSelectRate: 2,
+				currentQty: 2,
+				currentAmount: 2,
+				increaseAmount: 2
+
+			},
+			{
+				dishName: 3,
+				middleClassName: 'name3',
+				currentSelectRate: 3,
+				currentQty: 3,
+				currentAmount: 3,
+				increaseAmount: 3
+
+			}
+		];
+		var subData = [
+			{
+				num: 1,
+				item: 'name1',
+				qty: 1,
+				unit: 1,
+				total: 1
+
+			},
+			{
+				num: 2,
+				item: 'name2',
+				qty: 2,
+				unit: 2,
+				total: 2
+
+			},
+			{
+				num: 3,
+				item: 'name3',
+				qty: 3,
+				unit: 3,
+				total: 3
+
+			},
+			{
+				num: 4,
+				item: 'name3',
+				qty: 3,
+				unit: 3,
+				total: 3
+
+			},
+			{
+				num: 5,
+				item: 'name3',
+				qty: 3,
+				unit: 3,
+				total: 3
+
+			},
+			{
+				num: 6,
+				item: 'name3',
+				qty: 3,
+				unit: 3,
+				total: 3
+
+			},
+			{
+				num: 2,
+				item: 'name2',
+				qty: 2,
+				unit: 2,
+				total: 2
+
+			},
+			{
+				num: 3,
+				item: 'name3',
+				qty: 3,
+				unit: 3,
+				total: 3
+
+			},
+			{
+				num: 4,
+				item: 'name3',
+				qty: 3,
+				unit: 3,
+				total: 3
+
+			},
+			{
+				num: 5,
+				item: 'name3',
+				qty: 3,
+				unit: 3,
+				total: 3
+
+			},
+			{
+				num: 6,
+				item: 'name3',
+				qty: 3,
+				unit: 3,
+				total: 3
+
+			}
+		];
+	</script>
+</body>
+</html>
